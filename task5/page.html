@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <meta charset=utf-8>
+    <style type="text/css">
+      *{
+        padding:0;
+        margin:0;
+        box-sizing: border-box;
+      }
+      body{
+        background:#f7f2f1;
+        font-family: "Microsoft Yahei";
+        font-size: 20px;
+      }
+      #app{
+        width:650px;
+        padding-top:40px;
+        margin:0 auto;
+      }
+      #signInAndSignUp{
+        text-align: center;
+        width:220px;
+        margin:0 auto;
+        padding:80px 0;
+      }
+      #signInAndSignUp label{
+        padding: 12px;
+        cursor: pointer;
+      }
+      .formRow input{
+        width: 300px;
+        height: 50px;
+        font-size:18px;
+        border:1px solid #ccc;
+        border-radius: 5px;
+        margin:10px 0;
+      }
+      .formAction input{
+        width: 300px;
+        height: 40px;
+        font-size: 24px;
+        color: #fff;
+        border-radius: 5px;
+        border:none;
+      }
+      .btnRegister{
+        background: orange;
+      }
+      .btnLogin{
+        background: blue;
+      }
+      .logout{
+        float: right;
+        padding:5px;
+        margin-bottom: 10px;
+        border-radius: 3px;
+        color: #fff;
+        background-color: #EA6F5A;
+        cursor: pointer;
+      }
+      .newTask input{
+        width: 650px;
+        height:50px;
+        margin-bottom: 30px;
+        font-size: 24px;
+        border: 1px solid #ccc;
+        box-shadow:8px 8px 5px #ccc; 
+      }
+      .creatAt{
+        color:gray;
+        float: right;
+      }
+      .close{
+        color:#fff;
+        border: none;
+        margin-left: 15px;
+        padding:3px;
+        font-size: 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <section id="signInAndSignUp" v-if="!currentUser">
+        <div class="ct">
+        <!--使用 v-model将 actionType 与 radio button 绑定-->
+          <label><input class="btn active" type="radio" name="text" v-model="actionType" value="signUp">&nbspRegister</label>
+          <label><input class="btn" type="radio" name="text" v-model="actionType" value="login">&nbspLogin</label>
+        </div>
+        <div class="signUp" v-if="actionType=='signUp'">
+          <form @submit.prevent=signUp>
+            <div class="formRow">
+              <input type="text" v-model="formData.username" placeholder="username">
+            </div>
+            <div class="formRow">
+              <input type="password" v-model="formData.password" placeholder="password">
+            </div>
+            <div class="formAction">
+              <input class="btnRegister" type="submit" value="Register">
+            </div>
+          </form>
+        </div>
+        <div class="login" v-if="actionType=='login'">
+          <form @submit.prevent=login>
+            <div class="formRow">
+              <input type="text" v-model="formData.username" placeholder="username">
+            </div>
+            <div class="formRow">
+              <input type="password" v-model="formData.password" placeholder="password">
+            </div>
+            <div class="formAction">
+              <input class="btnLogin" type="submit" value="Login">
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="todo" v-if="currentUser">
+        <p>
+          <p>你好：{{this.formData.username}}</p>
+          <button class="logout" @click="logout">Logout</button>
+        </p>
+        <div class="newTask">
+        <input type="text" v-model="newTodo" @keypress.enter="addTodo" placeholder="Add a todo">
+        </div>
+        <ol class="todos">
+          <li v-for="todo in todoList">
+            <input type="checkbox" v-model="todo.done">{{todo.title}}
+
+            <span v-if="todo.done" style="color:red">已完成</span>
+            <span v-else style="color: blue">未完成</span>
+            <span class="creatAt">创建时间:{{todo.createdAt}}</span>
+
+            <button class="close" @click="removeTodo(todo)">X</button>
+          </li>
+        </ol>
+      </section>
+    </div>
+    <script src="bundle.js"></script>
+  </body>
+</html>
