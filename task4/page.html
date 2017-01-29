@@ -109,7 +109,7 @@
               <input type="text" v-model="formData.username" placeholder="username">
             </div>
             <div class="formRow">
-              <input type="text" v-model="formData.password" placeholder="password">
+              <input type="password" v-model="formData.password" placeholder="password">
             </div>
             <div class="formAction">
               <input class="btnLogin" type="submit" value="Login">
@@ -120,7 +120,8 @@
 
       <section id="todo" v-if="currentUser">
         <p>
-          <p>你好：{{this.formData.username}}</p>
+          <!--<p>你好：{{this.formData.username}}</p>--><!--如果用这个的话，刷新页面在时候就不会显示用户名了-->
+          <p>你好：{{currentUser.username}}</p>
           <button class="logout" @click="logout">Logout</button>
         </p>
         <div class="newTask">
