@@ -120,7 +120,7 @@
 
       <section id="todo" v-if="currentUser">
         <p>
-          <p>你好：{{this.formData.username}}</p>
+          <p>你好：{{currentUser.username}}</p>
           <button class="logout" @click="logout">Logout</button>
         </p>
         <div class="newTask">
