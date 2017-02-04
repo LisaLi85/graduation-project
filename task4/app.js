@@ -91,10 +91,10 @@ var app = new Vue({
       let user = new AV.User();
       user.setUsername(this.formData.username);
       user.setPassword(this.formData.password);
-      user.signUp().then((loginedUser) => {//将function改成箭头函数，方便使用this
-        this.currentUser = this.getCurrentUser()
+      user.signUp().then((loginedUser) => { // 将 function 改成箭头函数，方便使用 this
+        this.currentUser = this.getCurrentUser() 
       }, (error) => {
-        alert('注册失败')
+        alert('注册失败') 
       });
     },
     login:function(){

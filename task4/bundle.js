@@ -150,7 +150,7 @@
 	      user.setUsername(this.formData.username);
 	      user.setPassword(this.formData.password);
 	      user.signUp().then(function (loginedUser) {
-	        //将function改成箭头函数，方便使用this
+	        // 将 function 改成箭头函数，方便使用 this
 	        _this2.currentUser = _this2.getCurrentUser();
 	      }, function (error) {
 	        alert('注册失败');
