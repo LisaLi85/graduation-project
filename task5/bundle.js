@@ -95,31 +95,50 @@
 	  //     console.log(this.newTodo)
 	  //   },1000)
 	  // }
-
-
 	  created: function created() {
+	    // window.onbeforeunload = ()=>{
+	    //   let dataString = JSON.stringify(this.todoList) 
+	    //   let newTodoData = JSON.stringify(this.newTodo)
+	    //   // window.localStorage.setItem('myTodos', dataString) 
+	    //   window.localStorage.setItem('newTodoData',newTodoData)
 
-	    // window.onbeforeunload = ()=>{    
-	    // 	// 内容已经删除
+	    //   var AVTodos = AV.Object.extend('AllTodos');
+	    //   var avTodos = new AVTodos();
+	    //   avTodos.set('content', dataString);
+	    //   avTodos.save().then(function (todo) {
+	    //     // 成功保存之后，执行其他逻辑.
+	    //      console.log('保存成功');
+	    //   }, function (error) {
+	    //     // 异常处理
+	    //     console.error('保存失败');
+	    //   });
+	    //   //debugger
 	    // }
 
 	    // let oldDataString = window.localStorage.getItem('myTodos')
-	    // let newTodoData = window.localStorage.getItem('newTodoData')
+	    //let newTodoData = window.localStorage.getItem('newTodoData')
 
 	    // let oldData = JSON.parse(oldDataString)
-	    // let newTodo = JSON.parse(newTodoData)
+	    //let newTodo = JSON.parse(newTodoData)
 
 	    // this.todoList = oldData || []
-	    // this.newTodo = newTodo || ""
-
-	    // this.currentUser = this.getCurrentUser();
+	    //this.newTodo = newTodo || ""
 
 	    this.currentUser = this.getCurrentUser();
-	    this.fetchTodos(); // 将原来的一坨代码取一个名字叫做 fetchTodos  
+	    // if(this.currentUser){
+	    //     var query = new AV.Query('AllTodos');
+	    //     query.find()
+	    //       .then((todos) => {
+	    //         let avAllTodos = todos[0] // 因为理论上 AllTodos 只有一个，所以我们取结果的第一项
+	    //         this.todoList = JSON.parse(avAllTodos.attributes.content) // 为什么有个 attributes？因为我从控制台看到的
+	    //         this.todoList.id = id // 为什么给 todoList 这个数组设置 id？因为数组也是对象啊
+	    //       }, function(error){
+	    //         console.error(error) 
+	    //       })
+	    // }
+	    this.fetchTodos(); //将原来的一坨代码取一个名字叫做 fetchTodos
 	  },
-
 	  methods: {
-
 	    fetchTodos: function fetchTodos() {
 	      var _this = this;
 
@@ -135,42 +154,35 @@
 	        });
 	      }
 	    },
-
 	    updateTodos: function updateTodos() {
-	      // 想要知道如何更新对象，先看文档 https://leancloud.cn/docs/leanstorage_guide-js.html#更新对象
-	      var dataString = JSON.stringify(this.todoList); // JSON 在序列化这个有 id 的数组的时候，会得出怎样的结果？
+	      var dataString = JSON.stringify(this.todoList);
 	      var avTodos = _leancloudStorage2.default.Object.createWithoutData('AllTodos', this.todoList.id);
 	      avTodos.set('content', dataString);
 	      avTodos.save().then(function () {
 	        console.log('更新成功');
+	      }, function (error) {
+	        console.log('更新失败');
 	      });
 	    },
-
 	    saveTodos: function saveTodos() {
 	      var _this2 = this;
 
 	      var dataString = JSON.stringify(this.todoList);
 	      var AVTodos = _leancloudStorage2.default.Object.extend('AllTodos');
 	      var avTodos = new AVTodos();
-
 	      var acl = new _leancloudStorage2.default.ACL();
-	      acl.setReadAccess(_leancloudStorage2.default.User.current(), true); // 只有这个 user 能读
-	      acl.setWriteAccess(_leancloudStorage2.default.User.current(), true); // 只有这个 user 能写
-
+	      acl.setReadAccess(_leancloudStorage2.default.User.current(), true); //只有这个user能读
+	      acl.setWriteAccess(_leancloudStorage2.default.User.current(), true); //只有这个user能写
 	      avTodos.set('content', dataString);
-
-	      avTodos.setACL(acl); // 设置访问控制
-
+	      avTodos.setACL(acl); //设置访问控制
 	      avTodos.save().then(function (todo) {
 	        _this2.todoList.id = todo.id; // 一定要记得把 id 挂到 this.todoList 上，否则下次就不会调用 updateTodos 了
-	        //    alert('保存成功');
+	        //alert('保存成功');
 	        console.log('保存成功');
 	      }, function (error) {
-	        //    alert('保存失败');
-	        console.log('保存失败');
+	        alert('保存失败');
 	      });
 	    },
-
 	    saveOrUpdateTodos: function saveOrUpdateTodos() {
 	      if (this.todoList.id) {
 	        this.updateTodos();
@@ -178,7 +190,6 @@
 	        this.saveTodos();
 	      }
 	    },
-
 	    addTodo: function addTodo() {
 	      var date = new Date();
 	      var year = date.getFullYear(),
@@ -199,14 +210,15 @@
 	        done: false //添加一个done属性
 	      });
 	      this.newTodo = ''; // 变成空
-
-	      this.saveOrUpdateTodos(); // 不能用 saveTodos 了
+	      //this.saveTodos()
+	      this.saveOrUpdateTodos(); //不能用saveTodos了
 	    },
 	    // 加了删除待办这个函数
 	    removeTodo: function removeTodo(todo) {
 	      var index = this.todoList.indexOf(todo); // Array.prototype.indexOf 是 ES 5 新加的 API
 	      this.todoList.splice(index, 1); // 不懂 splice？赶紧看 MDN 文档！
-	      this.saveOrUpdateTodos(); // 不能用 saveTodos 了
+	      //this.saveTodos()
+	      this.saveOrUpdateTodos();
 	    },
 	    signUp: function signUp() {
 	      var _this3 = this;
@@ -215,11 +227,11 @@
 	      user.setUsername(this.formData.username);
 	      user.setPassword(this.formData.password);
 	      user.signUp().then(function (loginedUser) {
-	        //将function改成箭头函数，方便使用this
+	        // 将 function 改成箭头函数，方便使用 this
 	        _this3.currentUser = _this3.getCurrentUser();
 	      }, function (error) {
-	        //    alert('注册失败')
-	        console.log('注册失败');
+	        alert('注册失败');
+	        console.log(error);
 	      });
 	    },
 	    login: function login() {
@@ -227,10 +239,10 @@
 
 	      _leancloudStorage2.default.User.logIn(this.formData.username, this.formData.password).then(function (loginedUser) {
 	        _this4.currentUser = _this4.getCurrentUser();
-	        _this4.fetchTodos(); // // 登录成功后读取 todos
+	        _this4.fetchTodos(); // 登录成功后读取 todos
 	      }, function (error) {
-	        //    alert('登录失败')
-	        console.log('登录失败');
+	        alert('登录失败');
+	        console.log(error);
 	      });
 	    },
 	    getCurrentUser: function getCurrentUser() {
