@@ -522,6 +522,7 @@ template {
       justify-content: space-between;
   -ms-flex-align: center;
       align-items: center;
+  padding:16px;
 }
 #topbar .logo{
   font-size:24px;
@@ -553,4 +554,4 @@ a[data-v-524cd6bc] {
   color: #42b983;
 }
 
-/*# sourceMappingURL=app.e6d776c7cff7655371b74710bd70fd3d.css.map*/
+/*# sourceMappingURL=app.a830ded10cd3667c26a5ef3372509dc6.css.map*/

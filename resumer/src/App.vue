@@ -1,37 +1,32 @@
 <template>
-  <div class=page>
+  <div class="page">
      <header>
-       <Topbar/>
+        <Topbar/>      
      </header>
      <main>
-       <ResumeEditor/>
-       <ResumePreview/>
+         <ResumeEditor/>
+         <ResumePreview/>       
      </main>
-  </div>
+</div>
 </template>
 
 <script>
-
 import 'normalize.css/normalize.css'
 import './assets/reset.css'
-
-
 import Topbar from './components/Topbar'
 import ResumeEditor from './components/ResumeEditor'
 import ResumePreview from './components/ResumePreview'
-
-
 export default {
   name: 'app',
   data: function(){
     return {
       text: '你好'
-    }
+     }
   },
-  components: {Topbar,ResumeEditor,ResumePreview}
+  components: {Topbar, ResumeEditor, ResumePreview}
 }
 </script>
-  
+
 <style>
   .page{
        height: 100vh;
