@@ -32,7 +32,7 @@
     /*允许单个项目有与其他项目不一样的对齐方式*/
 }
 #resumeEditor {
-  width: 35%;
+  min-width: 35%;
   background: #444;
 }
 #resumePreview {
@@ -618,9 +618,57 @@ hr[data-v-53358100] {
   margin: 24px 0;
 }
 
-#resumePreview{
-  background:#ffffff;
-  box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
+#resumePreview {
+  background: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+  padding: 2em;
+  color: #333;
+  line-height: 1.2;
+  overflow: auto;
+}
+#resumePreview * {
+    box-sizing: border-box;
+    font-variant: normal;
+    font-weight: normal;
+}
+#resumePreview ol {
+    list-style: none;
+}
+#resumePreview section + section {
+    margin-top: 2em;
+}
+#resumePreview p {
+    white-space: pre-line;
+}
+#resumePreview section > h2:first-child {
+    background: #ddd;
+    display: inline-block;
+    padding: 0.2em;
+    margin-bottom: 0.5em;
+}
+#resumePreview section[data-name="profile"] > h1 {
+    margin: .1em 0;
+    font-size: 4em;
+}
+#resumePreview section[data-name="workHistory"] li + li,
+  #resumePreview section[data-name="projects"] li + li,
+  #resumePreview section[data-name="awards"] li + li,
+  #resumePreview section[data-name="others"] li + li {
+    margin-top: 1em;
+}
+#resumePreview section[data-name="workHistory"] li h3,
+  #resumePreview section[data-name="projects"] li h3,
+  #resumePreview section[data-name="awards"] li h3,
+  #resumePreview section[data-name="others"] li h3 {
+    border-bottom: 1px solid #999;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.3em;
+}
+#resumePreview section[data-name="education"] li {
+    line-height: 1.5;
+}
+#resumePreview section[data-name="contacts"] td:first-child {
+    padding-right: 1em;
 }
 
 h1[data-v-524cd6bc], h2[data-v-524cd6bc] {
@@ -638,4 +686,4 @@ a[data-v-524cd6bc] {
   color: #42b983;
 }
 
-/*# sourceMappingURL=app.b70aedaca6ecee55f5bb5ee2e64d43b3.css.map*/
+/*# sourceMappingURL=app.643771e355b4cf6652a35cef33e9dca6.css.map*/

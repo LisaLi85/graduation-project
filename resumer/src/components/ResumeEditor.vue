@@ -24,58 +24,30 @@
                <label>{{key}}</label>
                <input type="text" v-model="resume[item.field][key]">
             </div>
-	   </li>
+	     </li>
      </ol>
    </div>
 </template>
 
 <script>
+
  export default {
    name: 'ResumeEditor',
-   data() {
-     return{ 
-     	selected: 'profile',
-     	resume: {
-     		config:[
-     			{ field: 'profile', icon: 'id' },
-     			{ field: 'work history', icon: 'work' },
-     			{ field: 'education', icon: 'book' },
-     			{ field: 'projects', icon: 'heart' },
-     			{ field: 'awards', icon: 'cup' },
-     			{ field: 'contacts', icon: 'phone' },
-          { field: 'others', icon: 'add' },
-     		],
-     		profile: {
-     			name:'',
-     			city:'',
-     			title:''
-     		},
-     		'work history': [
-                {company: 'AL', content: '我的第二份工作是'},
-                {company: 'TX', content: '我的第一份工作是'}
-            ],
-     		education: [
-                {school: 'AL', content: '文字'},
-                {school: 'TX', content: '文字'}
-            ],
-     		projects: [
-                {name: 'AL', content: '文字'},
-                {name: 'TX', content: '文字'}
-            ],
-     		awards: [
-                {name: 'AL', content: '文字'},
-                {name: 'TX', content: '文字'}
-            ],
-     		contacts: [
-                {contact: 'AL', content: '13812345678'},
-                {contact: 'TX', content: '12345678'}
-            ],
-        others: [
-                {'self-evaluation': '文字'},
-                {hobby: '文字'}
-            ],
-     	}   
-     }
+   computed: {
+      selected:{
+         get(){
+           return this.$store.state.selected//vue中所有全局的东西都以$开头
+         },
+         set(value){
+           return this.$store.commit('switchTab', value)
+         }
+      },
+      resume () {
+        return this.$store.state.resume//这个地方把resume写成了selected导致editor的内容没有显示出来
+      }
+   },
+   methods: {
+      
    }
  }
 </script>
