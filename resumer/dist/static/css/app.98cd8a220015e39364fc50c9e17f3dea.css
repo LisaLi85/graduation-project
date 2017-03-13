@@ -541,21 +541,109 @@ template {
     font-size: 24px;
     color: #000000;
 }
-button[data-v-a0a88fb8] {
+.button[data-v-a0a88fb8] {
   width: 72px;
   height: 32px;
+  line-height: 32px;
   border: none;
   cursor: pointer;
   font-size: 18px;
-  background: #ddd;
-  color: #222;
+  background: #3da2f3;
+  color: white;
+  text-decoration: none;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  vertical-align: middle;
 }
-button[data-v-a0a88fb8]:hover {
+.button[data-v-a0a88fb8]:hover {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
-button.primary[data-v-a0a88fb8] {
+.button.primary[data-v-a0a88fb8] {
     background: #02af5f;
     color: white;
+}
+.actions[data-v-a0a88fb8] {
+  displya: flex;
+}
+.actions .userActions[data-v-a0a88fb8] {
+    margin-right: 3em;
+}
+.actions .userActions .welcome[data-v-a0a88fb8] {
+      margin-right: 0.5em;
+}
+
+.dialogwrapper[data-v-5083911a] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+}
+.dialog[data-v-5083911a] {
+  background: #fff;
+  min-height: 4em;
+  min-width: 10em;
+}
+.dialog > header[data-v-5083911a] {
+    padding: 16px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+}
+.dialog > main[data-v-5083911a] {
+    padding: 16px;
+}
+.dialog .close[data-v-5083911a] {
+    cursor: pointer;
+}
+
+.row {
+  margin-bottom: 10px;
+}
+.row > input {
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+}
+.actions > input {
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  height: 30px;
+  width: 200px;
+}
+.btnRegister {
+  background: #42c02e;
+}
+
+.row {
+  margin-bottom: 10px;
+}
+.row > input {
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+}
+.actions > input {
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  height: 30px;
+  width: 200px;
+}
+.btnLogin {
+  background: #3da2f3;
 }
 
 #resumeEditor[data-v-53358100] {
@@ -686,4 +774,4 @@ a[data-v-524cd6bc] {
   color: #42b983;
 }
 
-/*# sourceMappingURL=app.643771e355b4cf6652a35cef33e9dca6.css.map*/
+/*# sourceMappingURL=app.98cd8a220015e39364fc50c9e17f3dea.css.map*/

@@ -15,14 +15,17 @@
                <div class="subitem" v-for="subitem in resume[item.field]">
                  <div class="resumeField" v-for="(value,key) in subitem">
                    <label> {{key}} </label>
-                   <input type="text" :value="value">
+                   <input type="text" :value="value" @input="changeResumeField(`${item.field}.${i}.${key}`, $event.target.value)">
+
                  </div>
                  <hr>
                </div>
             </div>
        		<div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
-               <label>{{key}}</label>
-               <input type="text" v-model="resume[item.field][key]">
+	               <label>{{key}}</label>
+	               <!--<input type="text" v-model="resume[item.field][key]">v-model 不允许使用，因为这是双向绑定语法-->
+	               <!--<input type="text" :value="value" @input="changeResumeField(item.field, key, $event.target.value)">-->
+	               <input type="text" :value="value" @input="changeResumeField(`${item.field}.${key}`, $event.target.value)">
             </div>
 	     </li>
      </ol>
@@ -47,7 +50,12 @@
       }
    },
    methods: {
-      
+      changeResumeField(path, value){
+      	this.$store.commit('updateResume',{
+      		path,
+      		value
+      	})
+      }
    }
  }
 </script>
